@@ -12,6 +12,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import shutil
 import csv
+import threading
 
 filetype = int(input("1 for .mid filetype, 2 for .wav filetype "))
 
@@ -104,6 +105,27 @@ time.sleep(2)
 
 
 #bps = beats per second
-bps = int(tempo) / 60#seconds
+# bps = int(tempo) / 60#seconds
 
+with open('music.csv', 'r') as csv_file:
+    csv_reader = csv.reader(csv_file)
+    consecutive = [0]
+    num_threads = 0
+    for line in csv_reader:
+        if line[1] != consecutive[0]:
+            current = len(consecutive)
+            if current >= num_threads:
+                num_threads = current
+            consecutive = [line[1]]
+        else:
+            consecutive.append(line[1])
+
+#Create sorting algo to make sure each note in a chord has its own thread
+
+def music_thread(thread):
+    print(sdad)
+
+    
+for i in num_threads:
+    "T" + str(i) = threading.Thread(target=music_thread, args=("T" + str(i), "list" + str(i)))
 
